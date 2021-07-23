@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import root from 'window-or-global';
 
-import Modal from '@wui/basics/modal';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Typography from '@material-ui/core/Typography';
 
 const activeEvents = ['mousemove', 'click', 'scroll', 'keypress'];
 
@@ -60,9 +64,16 @@ const IdleSessionHandler = ({ warningTime, expirationTime, expirationHandler }) 
   }, []);
 
   return (
-    <Modal open={showWarning} title="Expiring session due to inactivity">
-      Your session will automatically expire in {Math.floor(counter / 1000)} seconds.
-    </Modal>
+    <Dialog open={showWarning}>
+      <DialogTitle>
+        <Typography variant="h5">Expiring session due to inactivity</Typography>
+      </DialogTitle>
+      <DialogContent dividers>
+        <DialogContentText>
+            {`Your session will automatically expire in ${Math.floor(counter / 1000)} seconds.`}
+        </DialogContentText>
+      </DialogContent>
+    </Dialog>
   );
 };
 
